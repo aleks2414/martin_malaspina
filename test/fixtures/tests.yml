@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  colegio: MyString
+  nivel: MyString
+  seccion: MyString
+  edad: 1.5
+  ic: 1.5
+  icm: 1.5
+  pi_num: 1.5
+  pi_comp: 1.5
+  pi_cal: 1.5
+  pi_conc: 1.5
+  pf_conv: 1.5
+  pf_hecho: 1.5
+  pf_calc: 1.5
+  pf_conce: 1.5
+
+two:
+  nombre: MyString
+  colegio: MyString
+  nivel: MyString
+  seccion: MyString
+  edad: 1.5
+  ic: 1.5
+  icm: 1.5
+  pi_num: 1.5
+  pi_comp: 1.5
+  pi_cal: 1.5
+  pi_conc: 1.5
+  pf_conv: 1.5
+  pf_hecho: 1.5
+  pf_calc: 1.5
+  pf_conce: 1.5

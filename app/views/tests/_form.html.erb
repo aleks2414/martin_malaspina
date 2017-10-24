@@ -1,0 +1,77 @@
+<%= form_for(@test) do |f| %>
+  <% if @test.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@test.errors.count, "error") %> prohibited this test from being saved:</h2>
+
+      <ul>
+      <% @test.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :colegio %><br>
+    <%= f.text_field :colegio %>
+  </div>
+  <div class="field">
+    <%= f.label :nivel %><br>
+    <%= f.text_field :nivel %>
+  </div>
+  <div class="field">
+    <%= f.label :seccion %><br>
+    <%= f.text_field :seccion %>
+  </div>
+  <div class="field">
+    <%= f.label :edad %><br>
+    <%= f.text_field :edad %>
+  </div>
+  <div class="field">
+    <%= f.label :ic %><br>
+    <%= f.text_field :ic %>
+  </div>
+  <div class="field">
+    <%= f.label :icm %><br>
+    <%= f.text_field :icm %>
+  </div>
+  <div class="field">
+    <%= f.label :pi_num %><br>
+    <%= f.text_field :pi_num %>
+  </div>
+  <div class="field">
+    <%= f.label :pi_comp %><br>
+    <%= f.text_field :pi_comp %>
+  </div>
+  <div class="field">
+    <%= f.label :pi_cal %><br>
+    <%= f.text_field :pi_cal %>
+  </div>
+  <div class="field">
+    <%= f.label :pi_conc %><br>
+    <%= f.text_field :pi_conc %>
+  </div>
+  <div class="field">
+    <%= f.label :pf_conv %><br>
+    <%= f.text_field :pf_conv %>
+  </div>
+  <div class="field">
+    <%= f.label :pf_hecho %><br>
+    <%= f.text_field :pf_hecho %>
+  </div>
+  <div class="field">
+    <%= f.label :pf_calc %><br>
+    <%= f.text_field :pf_calc %>
+  </div>
+  <div class="field">
+    <%= f.label :pf_conce %><br>
+    <%= f.text_field :pf_conce %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
