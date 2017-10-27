@@ -35,7 +35,7 @@
         <td><%= test.colegio %></td>
         <td><%= test.nivel %></td>
         <td><%= test.seccion %></td>
-        <td><%= test.edad %></td>
+        <td><%= test.edad %> meses</td>
         <td><%= link_to 'Ver', test_path(test, :format => 'pdf'), :target => "_blank" %></td>
         <td><%= link_to 'Editar', edit_test_path(test) %></td>
         <td><%= link_to 'Eliminar', test, method: :delete, data: { confirm: 'Are you sure?' } %></td>
