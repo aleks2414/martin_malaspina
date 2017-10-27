@@ -8,7 +8,7 @@ class TestsController < ApplicationController
     @q= Test.ransack(params[:q])
     @tests = @q.result.uniq
 
-    @tests = @tests.order('nombre ASC').paginate(:page => params[:page], :per_page => 30)
+    @tests = @tests.order('id ASC').paginate(:page => params[:page], :per_page => 30)
       respond_to do |format|
       format.html
       format.csv { send_data @tests.to_csv(['nombre', 'colegio', 'nivel', 'seccion', 'edad', 'ic', 'icm', 'pi_num', 'pi_comp', 'pi_cal', 'pi_conc', 'pf_conv', 'pf_hecho', 'pf_calc', 'pf_conce']) }
