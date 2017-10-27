@@ -1,8 +1,20 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Listing Tests</h1>
+<br><br>
+<%= search_form_for @q do |f| %>
+<h3>Busqueda:</h3>
+<%= f.search_field :nombre_or_colegio_cont, placeholder: "Buscar por Nombre Alumno o Colegio", class: "new"  %>
 
-<table>
+
+<%= f.submit "Buscar", class: "button button_red" %>
+<%= link_to "Borrar Filtros", root_path, class: "button button_red" %>
+<% end %>
+
+<hr>
+
+
+<h3>Pruebas:</h3>
+<div class="content table-responsive table-full-width">
+        <table class="table table-hover table-striped">
   <thead>
     <tr>
       <th>Nombre</th>
@@ -10,16 +22,6 @@
       <th>Nivel</th>
       <th>Seccion</th>
       <th>Edad</th>
-      <th>Ic</th>
-      <th>Icm</th>
-      <th>Pi num</th>
-      <th>Pi comp</th>
-      <th>Pi cal</th>
-      <th>Pi conc</th>
-      <th>Pf conv</th>
-      <th>Pf hecho</th>
-      <th>Pf calc</th>
-      <th>Pf conce</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -32,24 +34,18 @@
         <td><%= test.nivel %></td>
         <td><%= test.seccion %></td>
         <td><%= test.edad %></td>
-        <td><%= test.ic %></td>
-        <td><%= test.icm %></td>
-        <td><%= test.pi_num %></td>
-        <td><%= test.pi_comp %></td>
-        <td><%= test.pi_cal %></td>
-        <td><%= test.pi_conc %></td>
-        <td><%= test.pf_conv %></td>
-        <td><%= test.pf_hecho %></td>
-        <td><%= test.pf_calc %></td>
-        <td><%= test.pf_conce %></td>
-        <td><%= link_to 'Show', test %></td>
-        <td><%= link_to 'Edit', edit_test_path(test) %></td>
-        <td><%= link_to 'Destroy', test, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', test_path(test, :format => 'pdf'), :target => "_blank" %></td>
+        <td><%= link_to 'Editar', edit_test_path(test) %></td>
+        <td><%= link_to 'Eliminar', test, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+
+
   </tbody>
 </table>
+</div>
+    <%= will_paginate @tests %>
 
 <br>
 
-<%= link_to 'New Test', new_test_path %>
+

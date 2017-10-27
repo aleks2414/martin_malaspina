@@ -1,11 +1,26 @@
 class TestsController < ApplicationController
   before_action :set_test, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /tests
   # GET /tests.json
   def index
-    @tests = Test.all
+
+    @q= Test.ransack(params[:q])
+    @tests = @q.result.uniq
+
+    @tests = @tests.order('nombre ASC').paginate(:page => params[:page], :per_page => 30)
+      respond_to do |format|
+      format.html
+      format.csv { send_data @tests.to_csv(['nombre', 'colegio', 'nivel', 'seccion', 'edad', 'ic', 'icm', 'pi_num', 'pi_comp', 'pi_cal', 'pi_conc', 'pf_conv', 'pf_hecho', 'pf_calc', 'pf_conce']) }
+    end
   end
+
+    def import
+    Test.import(params[:file])
+    redirect_to root_url, notice: "Tests imported."
+  end
+
+
 
   # GET /tests/1
   # GET /tests/1.json
@@ -29,7 +44,7 @@ su edad."
 alcanzar el nivel esperado para su edad:"
     end
 
-    if @test.nivel == "inicial" then 
+    if @test.nivel == "Inicial" then 
       @c = "Conversar con sus hijos puede ser una buena forma de introducir vocabulario nuevo
 en ellos. Pregunte a sus hijos acerca de su día. Incluso los adultos pueden introducir
 nuevo vocabulario a los niños, actuando o ejemplificando el uso de las palabras
@@ -185,7 +200,7 @@ Algunas recomendaciones para practicar lo aprendido y/o generar nuevos aprendiza
 * Para que practiquen el conteo de 10 en 10 se puede jugar un juego en el que los niños tienen que contar con rapidez objetos agrupados en colecciones de diez. Si se prima la velocidad, los niños aprenden rápidamente a contar de 10 en 10.
 "
 
-elsif @test.edad.between?(72, 77) && @test.pi_num.between(13, 16) then
+elsif @test.edad.between?(72, 77) && @test.pi_num.between?(13, 16) then
   @f = "El/la estudiante ha adquirido las habilidades de numeración de acuerdo a lo esperado para la edad que posee.
 Algunas recomendaciones para mejorar lo aprendido:
 
@@ -232,7 +247,7 @@ Algunas recomendaciones para practicar lo aprendido y/o generar nuevos aprendiza
 * Para que practiquen el conteo de 10 en 10 se puede jugar un juego en el que los niños tienen que contar con rapidez objetos agrupados en colecciones de diez. Si se prima la velocidad, los niños aprenden rápidamente a contar de 10 en 10.
 "
 
-elsif @test.edad.between?(78, 83) && @test.pi_num.between(15, 17) then
+elsif @test.edad.between?(78, 83) && @test.pi_num.between?(15, 17) then
   @f = "El/la estudiante ha adquirido las habilidades de numeración de acuerdo a lo esperado para la edad que posee.
 Algunas recomendaciones para mejorar lo aprendido:
 
@@ -275,7 +290,7 @@ Algunas recomendaciones para practicar lo aprendido y/o generar nuevos aprendiza
 * Practicar secuencias de conteo con un patrón establecido, de 4 en 4, de 6 en 6, etc.
 "
 
-elsif @test.edad.between?(84, 95) && @test.pi_num.between(16, 18) then
+elsif @test.edad.between?(84, 95) && @test.pi_num.between?(16, 18) then
   @f = "El/la estudiante ha adquirido las habilidades de numeración de acuerdo a lo esperado para la edad que posee.
 Algunas recomendaciones para mejorar lo aprendido:
 
@@ -957,7 +972,7 @@ end
   def update
     respond_to do |format|
       if @test.update(test_params)
-        format.html { redirect_to @test, notice: 'Test was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Test was successfully updated.' }
         format.json { render :show, status: :ok, location: @test }
       else
         format.html { render :edit }
@@ -979,7 +994,7 @@ end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_test
-      @test = Test.find(params[:id])
+      @test = Test.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

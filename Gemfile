@@ -28,6 +28,9 @@ gem 'devise'
 gem "prawnto_2", :require => "prawnto"
 gem 'prawn-table'
 gem 'ransack'
+gem 'roo'
+gem 'friendly_id', '~> 5.1.0'
+gem 'will_paginate', '~> 3.1.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
